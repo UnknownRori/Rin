@@ -2,7 +2,7 @@
 
 namespace UnknownRori\ProjectReiki\Http;
 
-use UnknownRori\ProjectReiki\Facades\SessionManager;
+use UnknownRori\ProjectReiki\Facades\Session;
 
 class Request
 {
@@ -12,12 +12,11 @@ class Request
     protected string $acceptContentType = '';
     protected string $method = 'GET';
     protected string $ip = '';
-    protected SessionManager $session;
+    protected Session $session;
 
 
-    public function __construct()
+    public function __construct(protected Session $sesion)
     {
-        $this->session = new SessionManager();
         $this->GET = &$_GET;
         $this->POST = &$_POST;
         $this->method = $_SERVER['REQUEST_METHOD'];
@@ -105,9 +104,9 @@ class Request
 
     /**
      * Get the session manager
-     * @return \UnknownRori\ProjectReiki\Facades\SessionManager
+     * @return \UnknownRori\ProjectReiki\Facades\Session
      */
-    public function session(): SessionManager
+    public function session(): Session
     {
         return $this->session;
     }
