@@ -16,10 +16,20 @@
             "UnknownRori\\ProjectReiki\\": "src/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "UnknownRori\\ProjectReiki\\Tests": "tests/"
+        }
+    },
     "authors": [
         {
             "name": "UnknownRori",
             "email": "68576836+UnknownRori@users.noreply.github.com"
         }
-    ]
+    ],
+    "archive": {
+        "exclude": [
+            "/tests/**/*"
+        ]
+    }
 }
