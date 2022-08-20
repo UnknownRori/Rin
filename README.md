@@ -1,16 +1,16 @@
 # Project Rin
 
-* Overview
+* [Overview](https://github.com/UnknownRori/project-rin#-overview)
 
-* Feature
+* [Feature](https://github.com/UnknownRori/project-rin#-feature)
 
-* Installation
+* [Installation](https://github.com/UnknownRori/project-rin#-for-project)
 
-    * For Project
+    * [For Projects](https://github.com/UnknownRori/project-rin#-for-projects)
 
-    * For Development
+    * [For Development](https://github.com/UnknownRori/project-rin#%EF%B8%8F-for-development)
     
-* Contribution
+* [Contribution](https://github.com/UnknownRori/project-rin#-contribution)
 
 
 ## 📔 Overview
@@ -27,7 +27,7 @@ Project Rin is a lightweight minimalistic framework written in php, it's feature
 
 ## 🛠️ Installation
 
-* ### 📦 For Project
+* ### 📦 For Projects
 
     Not available on composer yet
 
