@@ -1,6 +1,6 @@
 <?php
 
-namespace UnknownRori\ProjectReiki\Facades;
+namespace UnknownRori\ProjectRin\Facades;
 
 class Session
 {

@@ -1,9 +1,9 @@
 <?php
 
-namespace UnknownRori\ProjectReiki;
+namespace UnknownRori\ProjectRin;
 
 use Psr\Container\ContainerInterface;
-use UnknownRori\ProjectReiki\Exceptions\ContainerKeyNotFound;
+use UnknownRori\ProjectRin\Exceptions\ContainerKeyNotFound;
 
 /**
  * Built in Dependency Injection Container, 

@@ -1,8 +1,8 @@
 <?php
 
-namespace UnknownRori\ProjectReiki\Http;
+namespace UnknownRori\ProjectRin\Http;
 
-use UnknownRori\ProjectReiki\Facades\Session;
+use UnknownRori\ProjectRin\Facades\Session;
 
 class Request
 {
@@ -104,7 +104,7 @@ class Request
 
     /**
      * Get the session manager
-     * @return \UnknownRori\ProjectReiki\Facades\Session
+     * @return \UnknownRori\ProjectRin\Facades\Session
      */
     public function session(): Session
     {

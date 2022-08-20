@@ -1,10 +1,10 @@
 <?php
 
-namespace UnknownRori\ProjectReiki\Http;
+namespace UnknownRori\ProjectRin\Http;
 
-use UnknownRori\ProjectReiki\Contracts\Response as IResponse;
-use UnknownRori\ProjectReiki\Contracts\Response\JsonResponse;
-use UnknownRori\ProjectReiki\Contracts\Response\ViewResponse;
+use UnknownRori\ProjectRin\Contracts\Response as IResponse;
+use UnknownRori\ProjectRin\Contracts\Response\JsonResponse;
+use UnknownRori\ProjectRin\Contracts\Response\ViewResponse;
 
 class Response implements IResponse, JsonResponse, ViewResponse
 {

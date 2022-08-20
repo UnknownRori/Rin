@@ -1,8 +1,8 @@
 <?php
 
-namespace UnknownRori\ProjectReiki\Contracts\Response;
+namespace UnknownRori\ProjectRin\Contracts\Response;
 
-use UnknownRori\ProjectReiki\Contracts\Response;
+use UnknownRori\ProjectRin\Contracts\Response;
 
 /**
  * Json type response
