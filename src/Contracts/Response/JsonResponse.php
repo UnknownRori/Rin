@@ -2,6 +2,8 @@
 
 namespace UnknownRori\ProjectReiki\Contracts\Response;
 
+use UnknownRori\ProjectReiki\Contracts\Response;
+
 /**
  * Json type response
  */
