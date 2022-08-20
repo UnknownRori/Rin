@@ -5,14 +5,14 @@ namespace UnknownRori\Rin;
 use Psr\Container\ContainerInterface;
 
 /**
- * Application Bootstrap of Project Reiki light weight framework
+ * Application Bootstrap of Rin light weight framework
  */
 class Application
 {
     public ?ContainerInterface $container;
 
     /**
-     *  Initialize Project Reiki Application bootstrap
+     *  Initialize Rin Application bootstrap
      */
     public function __construct(ContainerInterface $container = new Container())
     {
@@ -20,7 +20,7 @@ class Application
     }
 
     /**
-     * Serve the Project Reiki Application
+     * Serve the Rin Application
      */
     public function serve(): void
     {
