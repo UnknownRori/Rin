@@ -5,17 +5,22 @@ namespace UnknownRori\Rin;
 use Psr\Container\ContainerInterface;
 
 /**
- * Application Bootstrap of Rin light weight framework
+ * Application Bootstrap of Rin lightweight framework
  */
 class Application
 {
-    public ?ContainerInterface $container;
+    public static Configuration $config;
+    public ContainerInterface $container;
 
     /**
      *  Initialize Rin Application bootstrap
      */
-    public function __construct(ContainerInterface $container = new Container())
+    public function __construct(
+        Configuration $configuration = new Configuration(),
+        ContainerInterface $container = new Container()
+        )
     {
+        self::$config = $configuration;
         $this->container = $container;
     }
 
