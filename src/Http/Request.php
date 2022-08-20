@@ -2,7 +2,7 @@
 
 namespace UnknownRori\Rin\Http;
 
-use UnknownRori\Rin\Facades\Session;
+use UnknownRori\Rin\Contracts\Session;
 
 class Request
 {
@@ -104,7 +104,7 @@ class Request
 
     /**
      * Get the session manager
-     * @return \UnknownRori\Rin\Facades\Session
+     * @return \UnknownRori\Rin\Contracts\Session
      */
     public function session(): Session
     {
