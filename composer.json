@@ -13,12 +13,12 @@
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "UnknownRori\\ProjectRin\\": "src/"
+            "UnknownRori\\Rin\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "UnknownRori\\ProjectRin\\Tests": "tests/"
+            "UnknownRori\\Rin\\Tests": "tests/"
         }
     },
     "authors": [

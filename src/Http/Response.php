@@ -1,10 +1,10 @@
 <?php
 
-namespace UnknownRori\ProjectRin\Http;
+namespace UnknownRori\Rin\Http;
 
-use UnknownRori\ProjectRin\Contracts\Response as IResponse;
-use UnknownRori\ProjectRin\Contracts\Response\JsonResponse;
-use UnknownRori\ProjectRin\Contracts\Response\ViewResponse;
+use UnknownRori\Rin\Contracts\Response as IResponse;
+use UnknownRori\Rin\Contracts\Response\JsonResponse;
+use UnknownRori\Rin\Contracts\Response\ViewResponse;
 
 class Response implements IResponse, JsonResponse, ViewResponse
 {

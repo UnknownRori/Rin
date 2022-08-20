@@ -1,9 +1,9 @@
 <?php
 
-namespace UnknownRori\ProjectRin;
+namespace UnknownRori\Rin;
 
 use Psr\Container\ContainerInterface;
-use UnknownRori\ProjectRin\Exceptions\ContainerKeyNotFound;
+use UnknownRori\Rin\Exceptions\ContainerKeyNotFound;
 
 /**
  * Built in Dependency Injection Container, 

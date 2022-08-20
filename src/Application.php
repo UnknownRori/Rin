@@ -1,6 +1,6 @@
 <?php
 
-namespace UnknownRori\ProjectRin;
+namespace UnknownRori\Rin;
 
 use Psr\Container\ContainerInterface;
 

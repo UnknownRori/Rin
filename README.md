@@ -1,21 +1,21 @@
-# Project Rin
+# Rin
 
-* [Overview](https://github.com/UnknownRori/project-rin#-overview)
+* [Overview](https://github.com/UnknownRori/rin#-overview)
 
-* [Feature](https://github.com/UnknownRori/project-rin#-feature)
+* [Feature](https://github.com/UnknownRori/rin#-feature)
 
-* [Installation](https://github.com/UnknownRori/project-rin#-for-project)
+* [Installation](https://github.com/UnknownRori/rin#-for-project)
 
-    * [For Projects](https://github.com/UnknownRori/project-rin#-for-projects)
+    * [For Projects](https://github.com/UnknownRori/rin#-for-projects)
 
-    * [For Development](https://github.com/UnknownRori/project-rin#%EF%B8%8F-for-development)
+    * [For Development](https://github.com/UnknownRori/rin#%EF%B8%8F-for-development)
     
-* [Contribution](https://github.com/UnknownRori/project-rin#-contribution)
+* [Contribution](https://github.com/UnknownRori/rin#-contribution)
 
 
 ## 📔 Overview
 
-Project Rin is a lightweight minimalistic framework written in php, it's feature SEO Friendly Routing, Middleware, and Dependency Injection. This framework is trying to solve problem when someone said [Laravel](https://laravel.com/) is overkill so this framework will be replacement for someone who not very familiar with [CodeIgniter](https://codeigniter.com/), although this framework is bare minimum.
+Rin is a lightweight minimalistic framework written in php, it's feature SEO Friendly Routing, Middleware, and Dependency Injection. This framework is trying to solve problem when someone said [Laravel](https://laravel.com/) is overkill so this framework will be replacement for someone who not very familiar with [CodeIgniter](https://codeigniter.com/), although this framework is bare minimum.
 
 ## 🚀 Feature
 
@@ -35,10 +35,10 @@ Project Rin is a lightweight minimalistic framework written in php, it's feature
 
     ``` bash
     # Clone the repository
-    > git clone https://github.com/UnknownRori/project-rin.git
+    > git clone https://github.com/UnknownRori/rin.git
 
     # Enter the directory and install the dependency
-    > cd project-rin
+    > cd rin
     > composer install
     ```
 

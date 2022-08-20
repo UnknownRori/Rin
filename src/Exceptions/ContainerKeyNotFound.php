@@ -1,6 +1,6 @@
 <?php
 
-namespace UnknownRori\ProjectRin\Exceptions;
+namespace UnknownRori\Rin\Exceptions;
 
 use Exception;
 use Psr\Container\NotFoundExceptionInterface;

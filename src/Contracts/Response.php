@@ -1,6 +1,6 @@
 <?php
 
-namespace UnknownRori\ProjectRin\Contracts;
+namespace UnknownRori\Rin\Contracts;
 
 /**
  * Base interface for response class and it's contracts

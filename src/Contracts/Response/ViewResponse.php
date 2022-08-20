@@ -1,8 +1,8 @@
 <?php
 
-namespace UnknownRori\ProjectRin\Contracts\Response;
+namespace UnknownRori\Rin\Contracts\Response;
 
-use UnknownRori\ProjectRin\Contracts\Response;
+use UnknownRori\Rin\Contracts\Response;
 
 /**
  * View type response
