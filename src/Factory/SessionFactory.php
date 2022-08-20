@@ -13,9 +13,9 @@ class SessionFactory implements Factory
      * Create Session using passed type and configuration
      * @param  string  $type
      * @param  string  $configuration
-     * @return ?\UnknownRori\Rin\Contracts\Session
+     * @return \UnknownRori\Rin\Contracts\Session
      */
-    public static function create(string $type, array $configuration = []): ?Session
+    public static function create(string $type, array $configuration = []): Session
     {
         if ($type == 'file')
             self::$instance = new FileSession();

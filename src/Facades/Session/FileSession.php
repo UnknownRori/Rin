@@ -4,6 +4,9 @@ namespace UnknownRori\Rin\Facades\Session;
 
 use UnknownRori\Rin\Contracts\Session;
 
+/**
+ * File based session management
+ */
 class FileSession implements Session
 {
     public function __construct()
