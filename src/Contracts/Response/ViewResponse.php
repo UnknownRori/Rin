@@ -9,11 +9,5 @@ use UnknownRori\ProjectReiki\Contracts\Response;
  */
 interface ViewResponse extends Response
 {
-    /**
-     * Send out view response using the passed filepath that will concatenate 
-     * with view path that defined when initialize the Project Reiki
-     * @param  string  $path
-     * @return self
-     */
-    public function view(string $path): self;
+    public function view(array|string $path): self;
 }

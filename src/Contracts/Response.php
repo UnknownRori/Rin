@@ -7,19 +7,17 @@ namespace UnknownRori\ProjectReiki\Contracts;
  */
 interface Response
 {
-    /**
-     * Add header on returning response
-     * @param  string $header
-     * @param  string $value
-     * @return self
-     */
     public function header(string $header, string $value): self;
 
-    /**
-     * Add header on returning response
-     * @param  string $header
-     * @param  string $value
-     * @return self
-     */
     public function withHeaders(array $headers): self;
+
+    public function cookie(
+        string $name,
+        mixed $value,
+        int $expires = 60,
+        string $path = null,
+        string $domain = null,
+        bool $secure = false,
+        bool $httpOnly = false
+    ): bool;
 }
