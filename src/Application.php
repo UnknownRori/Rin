@@ -4,9 +4,7 @@ namespace UnknownRori\Rin;
 
 use Psr\Container\ContainerInterface;
 use UnknownRori\Rin\Factory\SessionFactory;
-use UnknownRori\Rin\Http\MiddlewareHandler;
-use UnknownRori\Rin\Http\Request;
-use UnknownRori\Rin\Http\Route;
+use UnknownRori\Rin\Http\{MiddlewareHandler, Request, Route};
 
 /**
  * Application Bootstrap of Rin lightweight framework
