@@ -35,8 +35,6 @@ class Middleware
                     $result[] = ResolveDependency::resolveInvoke(self::$middleware['routeMiddleware'][$middleware[$i]], $container, $additionalData);
                 else
                     return throw new MiddlewareNotFound($middleware[$i]);
-
-                return $result;
             }
 
             return $result;
