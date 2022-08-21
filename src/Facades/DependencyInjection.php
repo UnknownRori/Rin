@@ -5,6 +5,7 @@ use Psr\Container\ContainerInterface;
 use ReflectionClass;
 use ReflectionObject;
 use ReflectionFunction;
+use ReflectionMethod;
 
 /**
  *  A class that wrap around reflection to do automatic dependency injection
@@ -20,16 +21,10 @@ class DependencyInjection
      */
     public static function resolveInvoke(string $namespace, ContainerInterface $container, array $additionalData = []): mixed
     {
-        $class = self::resolveClass($namespace, $container, $additionalData);
-
-        $reflection = new ReflectionObject($class);
-        $params = $reflection->getMethod('__invoke')->getParameters();
-        $dependency = self::resolveDependency($params, $container, $additionalData);
-
-        return $class(...$dependency);
+        return self::resolveMethodCall($namespace, '__invoke', $container, $additionalData);
     }
 
-    public static function resolveClassCall(string $namespace, $method, ContainerInterface $container, array $additionalData = []): mixed
+    public static function resolveMethodCall(string $namespace, $method, ContainerInterface $container, array $additionalData = []): mixed
     {
         $class = self::resolveClass($namespace, $container, $additionalData);
 
@@ -97,15 +92,15 @@ class DependencyInjection
 
         foreach ($params as $param) {
             $argument = (string)$param->getType();
+            $name = $param->getName();
 
             if (class_exists($argument)) {
                 if (array_key_exists($argument, $additionalData))
-                    $dependency[$argument] = $additionalData[$argument];
+                    $dependency[$name] = $additionalData[$argument];
                 else
-                    $dependency[$argument] = $container->get($argument);
+                    $dependency[$name] = $container->get($argument);
             }
             else {
-                $name = $param->getName();
                 if (array_key_exists($name, $additionalData))
                     $dependency[$name] = $additionalData[$name];
                 else
