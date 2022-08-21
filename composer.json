@@ -31,5 +31,8 @@
         "exclude": [
             "/tests/**/*"
         ]
+    },
+    "scripts": {
+        "test": "phpunit"
     }
 }
