@@ -1,16 +1,16 @@
 # Rin
 
-* [Overview](https://github.com/UnknownRori/rin#-overview)
+* [Overview](https://github.com/UnknownRori/Rin#-overview)
 
-* [Feature](https://github.com/UnknownRori/rin#-feature)
+* [Feature](https://github.com/UnknownRori/Rin#-feature)
 
-* [Installation](https://github.com/UnknownRori/rin#-for-project)
+* [Installation](https://github.com/UnknownRori/Rin#-installation)
 
-    * [For Projects](https://github.com/UnknownRori/rin#-for-projects)
+    * [For Projects](https://github.com/UnknownRori/Rin#-for-projects)
 
-    * [For Development](https://github.com/UnknownRori/rin#%EF%B8%8F-for-development)
+    * [For Development](https://github.com/UnknownRori/Rin#%EF%B8%8F-for-development)
     
-* [Contribution](https://github.com/UnknownRori/rin#-contribution)
+* [Contribution](https://github.com/UnknownRori/Rin#-contribution)
 
 
 ## 📔 Overview
@@ -35,10 +35,10 @@ Rin is a lightweight minimalistic framework written in php, it's feature SEO Fri
 
     ``` bash
     # Clone the repository
-    > git clone https://github.com/UnknownRori/rin.git
+    > git clone https://github.com/UnknownRori/Rin.git
 
     # Enter the directory and install the dependency
-    > cd rin
+    > cd Rin
     > composer install
     ```
 
