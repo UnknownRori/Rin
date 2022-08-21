@@ -1,6 +1,6 @@
 <?php
 
-namespace UnknownRori\Rin\Tests;
+namespace UnknownRori\Rin\Tests\Core;
 
 use UnknownRori\Rin\Http\Middleware;
 use UnknownRori\Rin\Container;
@@ -19,6 +19,14 @@ class Sum
     public function __invoke(int $a, int $b)
     {
         return $a + $b;
+    }
+}
+
+class DoSomething
+{
+    public function __invoke(Authentication $auth)
+    {
+        return $auth();
     }
 }
 
@@ -84,5 +92,25 @@ class MiddlewareTests extends TestCase
         $result = Middleware::run('sum', $container, ['a' => 1, 'b' => 2]);
 
         $this->assertEquals(3, $result, "it should return 3");
+    }
+
+    /**
+     * @test
+     */
+    public function simple_dependency_inject_3()
+    {
+        $container = new Container();
+        $container->set(Authentication::class , new Authentication());
+
+        $middleware = [
+            'routeMiddleware' => [
+                'doSomething' => DoSomething::class
+            ]
+        ];
+
+        Middleware::Register($middleware);
+        $result = Middleware::run('doSomething', $container);
+
+        $this->assertEquals('Done!', $result, "it should return {Done!}");
     }
 }
