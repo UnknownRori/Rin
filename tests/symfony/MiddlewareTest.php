@@ -2,7 +2,7 @@
 
 namespace UnknownRori\Rin\Tests\Symfony;
 
-use UnknownRori\Rin\Http\Middleware;
+use UnknownRori\Rin\Http\MiddlewareHandler;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
@@ -40,8 +40,8 @@ class CoreMiddlewareTests extends TestCase
             ]
         ];
 
-        Middleware::Register($middleware);
-        $result = Middleware::run('auth', $container);
+        $handler = (new MiddlewareHandler($container))->register($middleware);
+        $result = $handler->run('auth');
 
         $this->assertEquals('Done!', $result, 'It should prinnt {Done!}');
     }
@@ -60,8 +60,8 @@ class CoreMiddlewareTests extends TestCase
             ]
         ];
 
-        Middleware::Register($middleware);
-        $result = Middleware::run('sum', $container);
+        $handler = (new MiddlewareHandler($container))->register($middleware);
+        $result = $handler->run('sum');
 
         $this->assertEquals("Done!", $result, "it should return {Done!}");
     }

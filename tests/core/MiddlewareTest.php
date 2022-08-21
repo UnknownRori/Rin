@@ -2,9 +2,9 @@
 
 namespace UnknownRori\Rin\Tests\Core;
 
-use UnknownRori\Rin\Http\Middleware;
 use UnknownRori\Rin\Container;
 use PHPUnit\Framework\TestCase;
+use UnknownRori\Rin\Http\MiddlewareHandler;
 
 class Authentication
 {
@@ -48,8 +48,8 @@ class MiddlewareTests extends TestCase
             ]
         ];
 
-        Middleware::Register($middleware);
-        $result = Middleware::run('auth', $container);
+        $handler = (new MiddlewareHandler($container))->register($middleware);
+        $result = $handler->run('auth');
 
         $this->assertEquals('Done!', $result, 'It should prinnt {Done!}');
     }
@@ -69,8 +69,8 @@ class MiddlewareTests extends TestCase
             ]
         ];
 
-        Middleware::Register($middleware);
-        $result = Middleware::run('sum', $container);
+        $handler = (new MiddlewareHandler($container))->register($middleware);
+        $result = $handler->run('sum');
 
         $this->assertEquals(3, $result, "it should return 3");
     }
@@ -88,8 +88,8 @@ class MiddlewareTests extends TestCase
             ]
         ];
 
-        Middleware::Register($middleware);
-        $result = Middleware::run('sum', $container, ['a' => 1, 'b' => 2]);
+        $handler = (new MiddlewareHandler($container))->register($middleware);
+        $result = $handler->run('sum', ['a' => 1, 'b' => 2]);
 
         $this->assertEquals(3, $result, "it should return 3");
     }
@@ -108,8 +108,8 @@ class MiddlewareTests extends TestCase
             ]
         ];
 
-        Middleware::Register($middleware);
-        $result = Middleware::run('doSomething', $container);
+        $handler = (new MiddlewareHandler($container))->register($middleware);
+        $result = $handler->run('doSomething');
 
         $this->assertEquals('Done!', $result, "it should return {Done!}");
     }
