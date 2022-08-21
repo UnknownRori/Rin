@@ -20,7 +20,7 @@ class Request
         $this->GET = &$_GET;
         $this->POST = &$_POST;
         $this->method = $_SERVER['REQUEST_METHOD'];
-        $this->contentType =  array_key_exists('CONTENT_TYPE', $_SERVER) ? $_SERVER['CONTENT_TYPE'] : '';
+        $this->contentType = array_key_exists('CONTENT_TYPE', $_SERVER) ? $_SERVER['CONTENT_TYPE'] : '';
         $this->acceptContentType = array_key_exists('HTTP_ACCEPT', $_SERVER) ? $_SERVER['HTTP_ACCEPT'] : '';
         $this->ip = $this->getClientIp();
     }
@@ -200,6 +200,24 @@ class Request
             return $token[0];
 
         return null;
+    }
+
+    /**
+     * Get the request method type ie GET
+     * @return string
+     */
+    public function method(): string
+    {
+        return $this->method;
+    }
+
+    /**
+     * Get URI path
+     * @return string
+     */
+    public function getPath(): string
+    {
+        return trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/');
     }
 
     /**
