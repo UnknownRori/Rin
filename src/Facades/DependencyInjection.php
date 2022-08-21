@@ -1,18 +1,16 @@
 <?php
 
-namespace UnknownRori\Rin\Services;
-
+namespace UnknownRori\Rin\Facades;
 use Psr\Container\ContainerInterface;
-use ReflectionFunction;
 use ReflectionClass;
 use ReflectionObject;
+use ReflectionFunction;
 
 /**
- * A services to resolve dependency injection
+ *  A class that wrap around reflection to do automatic dependency injection
  */
-class ResolveDependency
+class DependencyInjection
 {
-
     /**
      * call the __invoke of class using dependency injection
      * @param  string  $namespace
@@ -22,17 +20,24 @@ class ResolveDependency
      */
     public static function resolveInvoke(string $namespace, ContainerInterface $container, array $additionalData = []): mixed
     {
-        $reflection = new ReflectionClass($namespace);
-        $constructor = $reflection->getConstructor();
-        $params = $constructor ? $constructor->getParameters : [];
-        $dependency = self::resolveDependency($params, $container, $additionalData);
-        $class = new $namespace(...$dependency);
+        $class = self::resolveClass($namespace, $container, $additionalData);
 
         $reflection = new ReflectionObject($class);
         $params = $reflection->getMethod('__invoke')->getParameters();
         $dependency = self::resolveDependency($params, $container, $additionalData);
 
         return $class(...$dependency);
+    }
+
+    public static function resolveClassCall(string $namespace, $method, ContainerInterface $container, array $additionalData = []): mixed
+    {
+        $class = self::resolveClass($namespace, $container, $additionalData);
+
+        $reflection = new ReflectionObject($class);
+        $params = $reflection->getMethod($method)->getParameters();
+        $dependency = self::resolveDependency($params, $container, $additionalData);
+
+        return $class->$method(...$dependency);
     }
 
     /**
@@ -52,7 +57,38 @@ class ResolveDependency
 
     }
 
-    public static function resolveDependency(array $params, ContainerInterface $container, array $additionalData)
+    /**
+     * Resolve specific class namespace using either container or creating new one
+     * @param string $namespace
+     * @param \Psr\Container\ContainerInterface $container
+     * @param $additionalData
+     * @return object
+     */
+    public static function resolveClass(string $namespace, ContainerInterface $container, array $additionalData = []): object
+    {
+        $class = $container->has($namespace) ? $container->get($namespace) : null;
+
+        if (is_null($class)) {
+            $reflection = new ReflectionClass($namespace);
+            $constructor = $reflection->getConstructor();
+
+            $params = $constructor ? $constructor->getParameters : [];
+            $dependency = self::resolveDependency($params, $container, $additionalData);
+
+            $class = new $namespace(...$dependency);
+        }
+
+        return $class;
+    }
+
+    /**
+     * Resolve the targeted array of ReflectionParameter and return the resolved dependency in array
+     * @param  array<\ReflectionParameter> $params
+     * @param  \Psr\Container\ContainerInterface $container
+     * @param  array $additionalData
+     * @return array
+     */
+    public static function resolveDependency(array $params, ContainerInterface $container, array $additionalData = [])
     {
         if (!count($params))
             return [];
