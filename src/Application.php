@@ -31,12 +31,4 @@ class Application
     {
         //
     }
-
-    /**
-     * Automatic dependency injection on passed namespace and return the result
-     */
-    protected function inject($namespace): mixed
-    {
-        //
-    }
 }
