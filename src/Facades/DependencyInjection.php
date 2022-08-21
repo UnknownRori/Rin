@@ -49,7 +49,6 @@ class DependencyInjection
         $dependency = self::resolveDependency($params, $container, $additionalData);
 
         return $reflection->invoke(...$dependency);
-
     }
 
     /**
@@ -63,17 +62,16 @@ class DependencyInjection
     {
         $class = $container->has($namespace) ? $container->get($namespace) : null;
 
-        if (is_null($class)) {
-            $reflection = new ReflectionClass($namespace);
-            $constructor = $reflection->getConstructor();
+        if (!is_null($class))
+            return $class;
 
-            $params = $constructor ? $constructor->getParameters : [];
-            $dependency = self::resolveDependency($params, $container, $additionalData);
+        $reflection = new ReflectionClass($namespace);
+        $constructor = $reflection->getConstructor();
 
-            $class = new $namespace(...$dependency);
-        }
+        $params = $constructor ? $constructor->getParameters : [];
+        $dependency = self::resolveDependency($params, $container, $additionalData);
 
-        return $class;
+        return new $namespace(...$dependency);
     }
 
     /**
