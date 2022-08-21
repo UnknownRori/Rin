@@ -117,8 +117,9 @@ class Response implements IResponse, JsonResponse, ViewResponse
     {
         extract($data);
 
-        $path = (isset(Application::$config->viewLocation) ?Application::$config->viewLocation : './views//')
-            . $path . (isset(Application::$config->viewFileType) ?Application::$config->viewFileType : '.php');
+        $directory = !is_null(Application::$config->viewLocation) ?Application::$config->viewLocation : './views/';
+        $extension = !is_null(Application::$config->viewFileType) ?Application::$config->viewFileType : '.php';
+        $path = $directory . $path . $extension;
 
         if (!file_exists($path))
             throw new RuntimeException("File not found! File : {$path}");
