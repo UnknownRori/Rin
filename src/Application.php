@@ -3,6 +3,10 @@
 namespace UnknownRori\Rin;
 
 use Psr\Container\ContainerInterface;
+use UnknownRori\Rin\Factory\SessionFactory;
+use UnknownRori\Rin\Http\MiddlewareHandler;
+use UnknownRori\Rin\Http\Request;
+use UnknownRori\Rin\Http\Route;
 
 /**
  * Application Bootstrap of Rin lightweight framework
@@ -18,8 +22,7 @@ class Application
     public function __construct(
         Configuration $configuration = new Configuration(),
         ContainerInterface $container = new Container()
-        )
-    {
+    ) {
         self::$config = $configuration;
         $this->container = $container;
     }
@@ -29,6 +32,10 @@ class Application
      */
     public function serve(): void
     {
-        //
+        $session = SessionFactory::create(self::$config->sessionDriver, self::$config->sessionConfig);
+        $request = new Request($session);
+        $middleware = new MiddlewareHandler($this->container);
+
+        Route::serve($this->container, $request, $middleware);
     }
 }
