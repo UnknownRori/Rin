@@ -20,12 +20,12 @@ class DependencyInjection
      * @param  array $additionalData
      * @return mixed
      */
-    public static function resolveInvoke(string $namespace, ContainerInterface $container, array $additionalData = []): mixed
+    public static function resolveInvoke(string $namespace, ContainerInterface $container, array &$additionalData = []): mixed
     {
         return self::resolveMethodCall($namespace, '__invoke', $container, $additionalData);
     }
 
-    public static function resolveMethodCall(string $namespace, $method, ContainerInterface $container, array $additionalData = []): mixed
+    public static function resolveMethodCall(string $namespace, $method, ContainerInterface $container, array &$additionalData = []): mixed
     {
         $class = self::resolveClass($namespace, $container, $additionalData);
 
@@ -43,7 +43,7 @@ class DependencyInjection
      * @param  array $additionalData
      * @return mixed
      */
-    public static function resolveCall($namespace, ContainerInterface $container, array $additionalData = []): mixed
+    public static function resolveCall($namespace, ContainerInterface $container, array &$additionalData = []): mixed
     {
         $reflection = new ReflectionFunction($namespace);
         $params = $reflection->getParameters();
@@ -59,7 +59,7 @@ class DependencyInjection
      * @param $additionalData
      * @return object
      */
-    public static function resolveClass(string $namespace, ContainerInterface $container, array $additionalData = []): object
+    public static function resolveClass(string $namespace, ContainerInterface $container, array &$additionalData = []): object
     {
         $class = $container->has($namespace) ? $container->get($namespace) : null;
 
@@ -72,7 +72,9 @@ class DependencyInjection
         $params = $constructor ? $constructor->getParameters : [];
         $dependency = self::resolveDependency($params, $container, $additionalData);
 
-        return new $namespace(...$dependency);
+        $additionalData[$namespace] = new $namespace(...$dependency);
+
+        return $additionalData[$namespace];
     }
 
     /**
@@ -82,7 +84,7 @@ class DependencyInjection
      * @param  array $additionalData
      * @return array
      */
-    public static function resolveDependency(array $params, ContainerInterface $container, array $additionalData = [])
+    public static function resolveDependency(array $params, ContainerInterface $container, array &$additionalData = [])
     {
         if (!count($params))
             return [];
