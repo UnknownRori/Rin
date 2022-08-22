@@ -58,7 +58,7 @@ To start the server just type
 
 * ### 📦 For Projects
 
-    composer require unknownrori/project-reiki
+    `composer require unknownrori/project-reiki`
 
 * ### 🛠️ For Development
 
