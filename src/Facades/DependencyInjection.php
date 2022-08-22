@@ -1,6 +1,7 @@
 <?php
 
 namespace UnknownRori\Rin\Facades;
+
 use Psr\Container\ContainerInterface;
 use ReflectionClass;
 use ReflectionObject;
@@ -42,7 +43,7 @@ class DependencyInjection
      * @param  array $additionalData
      * @return mixed
      */
-    public static function resolveCall(string $namespace, ContainerInterface $container, array $additionalData = []): mixed
+    public static function resolveCall($namespace, ContainerInterface $container, array $additionalData = []): mixed
     {
         $reflection = new ReflectionFunction($namespace);
         $params = $reflection->getParameters();
@@ -97,8 +98,7 @@ class DependencyInjection
                     $dependency[$name] = $additionalData[$argument];
                 else
                     $dependency[$name] = $container->get($argument);
-            }
-            else {
+            } else {
                 if (array_key_exists($name, $additionalData))
                     $dependency[$name] = $additionalData[$name];
                 else
