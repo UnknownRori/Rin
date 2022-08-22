@@ -4,6 +4,8 @@ namespace UnknownRori\Rin;
 
 class Configuration
 {
+    public bool $debug = true;
+
     // View File Location
     public string $viewLocation = './views/';
 
