@@ -13,7 +13,7 @@ class SessionFactory implements Factory
     /**
      * Create Session using passed type and configuration
      * @param  string  $type
-     * @param  string  $configuration
+     * @param  array  $configuration
      * @return \UnknownRori\Rin\Contracts\Session
      * @throws \UnknownRori\Rin\Exceptions\DriverNotFound
      */
