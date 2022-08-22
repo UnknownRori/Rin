@@ -14,7 +14,10 @@
     "autoload": {
         "psr-4": {
             "UnknownRori\\Rin\\": "src/"
-        }
+        },
+        "files": [
+            "src/Bootstrap.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {
