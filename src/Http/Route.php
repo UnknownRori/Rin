@@ -4,6 +4,9 @@ namespace UnknownRori\Rin\Http;
 
 use Exception;
 use Psr\Container\ContainerInterface;
+use UnknownRori\Rin\Application;
+use UnknownRori\Rin\Facades\DependencyInjection;
+use UnknownRori\Rin\Exceptions\RouteNotFound;
 
 class Route
 {
@@ -41,22 +44,63 @@ class Route
         //     $this->registerResource();
         // } else
         if (isset($this->method)) {
-
             $this->registerPrefix();
-
-            if (!isset(self::$route[$this->method][$this->uri])) {
-                self::$route[$this->method][$this->uri] = ['action' => $this->controller];
-
-                $this->registerMiddleware();
-            } else return throw new Exception("Route already defined!");
-
+            $this->registerMiddleware();
             $this->registerName();
+
+            $this->commit();
         }
     }
 
     public static function serve(ContainerInterface $container, Request $request, MiddlewareHandler $middlewareHandler): void
     {
-        $uri = explode('/', $request->getPath());
+        $uri = $request->getPath();
+        if ($uri[-1] == '/' && strlen($uri) > 1)
+            $uri = substr_replace($uri, '', -1);
+
+        $uri = explode('/', $uri);
+        $uriRoute = self::$route[$request->method()];
+        $additionalData = [
+            Request::class => $request
+        ];
+
+        $max = count($uri);
+
+        for ($i = 0; $i < $max; $i++) {
+            if (array_key_exists($uri[$i], $uriRoute))
+                $uriRoute = $uriRoute[$uri[$i]];
+            else {
+                if ($uri[$i] == '')
+                    throw new RouteNotFound();
+
+                foreach ($uriRoute as $key => $value) {
+                    $matches = [];
+                    preg_match_all("/\{(\w+)\}/", $key, $matches);
+
+                    if (array_key_exists(1, $matches)) {
+                        $additionalData[$matches[1][0]] = $uri[$i];
+                        $uriRoute = $uriRoute[$key];
+
+                        if (array_key_exists($i + 1, $uri))
+                            if (array_key_exists($uri[$i + 1], $uriRoute))
+                                break;
+                    }
+                }
+            }
+        }
+
+        if (!array_key_exists('__controller', $uriRoute))
+            throw new RouteNotFound();
+
+        $controller = $uriRoute['__controller'];
+        $middleware = $uriRoute['__middleware'];
+
+        $middlewareHandler->run($middleware);
+
+        if (is_callable($controller))
+            DependencyInjection::resolveCall($controller, $container, $additionalData);
+
+        $middlewareHandler->run($middleware);
     }
 
     /**
@@ -270,6 +314,31 @@ class Route
         return $self;
     }
 
+
+    /**
+     * For debugging purposes (only work if `APP_DEBUG` is on)
+     * Dumping out all route, named route, and group iteration.
+     * @return array|void
+     */
+    public static function dump(): ?array
+    {
+        if (Application::$config->debug) return [
+            'Route' => self::$route,
+            'Named Route' => self::$nameRoute,
+            'Group Nest' => self::$groupIteration,
+            'Group Middleware Interation' => self::$groupMiddlewareIteration,
+            'Group Name Interation' => self::$groupNameIteration,
+            'Group Prefix Interation' => self::$groupPrefixIteration,
+            'Group Name' => self::$groupName,
+            'Group Prefix' => self::$groupPrefix,
+            'Group Middleware' => self::$groupMiddleware,
+            'Group Name Definer' => self::$groupNameDefiner,
+            'Group Prefix Definer' => self::$groupPrefixDefiner,
+            'Group Middleware Definer' => self::$groupMiddlewareDefiner,
+            'Group Status' => self::$groupStatus,
+        ];
+    }
+
     /**
      * Register the route
      * @param  string|array $method
@@ -283,7 +352,60 @@ class Route
         else
             $this->method = $method;
 
-        $this->uri = explode('/', $uri);
+        $this->uri = $uri;
         $this->controller = $controller;
+    }
+
+    protected function registerPrefix()
+    {
+        // Todo : Merge prefix with group
+    }
+
+    protected function registerName()
+    {
+        self::$nameRoute[$this->name] = $this->uri;
+        // Todo : Merge Name from group
+    }
+
+    protected function registerMiddleware()
+    {
+        // Todo : Merge the middleware with group
+        // if (isset(self::$groupMiddleware)) {
+        //     $mergedMiddleware = [];
+
+        //     for ($i = 0; $i < count(self::$groupMiddleware); $i++) {
+        //         if (isset(self::$groupMiddleware[$i])) {
+        //             if (is_array(self::$groupMiddleware[$i])) {
+        //                 $mergedMiddleware = array_merge($mergedMiddleware, self::$groupMiddleware[$i]);
+        //             } else {
+        //                 $mergedMiddleware = array_merge($mergedMiddleware, [self::$groupMiddleware[$i]]);
+        //             }
+        //         }
+        //     }
+
+        //     $this->middleware = $mergedMiddleware;
+        // }
+    }
+
+    /**
+     * Commit the current route definition into global definition
+     */
+    protected function commit()
+    {
+        $uri = explode('/', $this->uri);
+        $uriRoute = &self::$route[$this->method];
+        $max = count($uri);
+
+        for ($i = 0; $i < $max; $i++) {
+            if (!array_key_exists($uri[$i], $uriRoute))
+                $uriRoute[$uri[$i]] = [];
+
+            $uriRoute = &$uriRoute[$uri[$i]];
+
+            if ($i == $max - 1) {
+                $uriRoute['__middleware'] = is_null($this->middleware) ? [] : $this->middleware;
+                $uriRoute['__controller'] = $this->controller;
+            }
+        }
     }
 }
