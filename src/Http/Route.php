@@ -77,7 +77,7 @@ class Route
                     $matches = [];
                     preg_match_all("/\{(\w+)\}/", $key, $matches);
 
-                    if (array_key_exists(1, $matches)) {
+                    if (count($matches[1])) {
                         $additionalData[$matches[1][0]] = $uri[$i];
                         $uriRoute = $uriRoute[$key];
 
