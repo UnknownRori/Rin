@@ -14,6 +14,11 @@ class Application
     public static Configuration $config;
     public ContainerInterface $container;
 
+    // array<\UnknownRori\Rin\Contracts\Factory, array>
+    public array $factory = [
+        'session' => SessionFactory::class,
+    ];
+
     /**
      *  Initialize Rin Application bootstrap
      */
@@ -26,11 +31,20 @@ class Application
     }
 
     /**
+     * Register a custom factory to the application
+     * @param  string $namespace - must implement \UnknownRori\Contracts\Factory
+     */
+    public function registerFactory(string $name, string $namespace)
+    {
+        $this->factory[$name] = $namespace;
+    }
+
+    /**
      * Serve the Rin Application
      */
     public function serve(): void
     {
-        $session = SessionFactory::create(self::$config->sessionDriver, self::$config->sessionConfig);
+        $session = $this->factory['session']::create(self::$config->sessionDriver, self::$config->sessionConfig);
         $request = new Request($session);
         $middleware = new MiddlewareHandler($this->container);
 
