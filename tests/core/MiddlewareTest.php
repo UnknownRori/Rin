@@ -81,6 +81,7 @@ class MiddlewareTests extends TestCase
     public function simple_dependency_inject_2()
     {
         $container = new Container();
+        $additionalData = ['a' => 1, 'b' => 2];
 
         $middleware = [
             'routeMiddleware' => [
@@ -89,7 +90,7 @@ class MiddlewareTests extends TestCase
         ];
 
         $handler = (new MiddlewareHandler($container))->register($middleware);
-        $result = $handler->run('sum', ['a' => 1, 'b' => 2]);
+        $result = $handler->run('sum', $additionalData);
 
         $this->assertEquals(3, $result, "it should return 3");
     }
@@ -100,7 +101,7 @@ class MiddlewareTests extends TestCase
     public function simple_dependency_inject_3()
     {
         $container = new Container();
-        $container->set(Authentication::class , new Authentication());
+        $container->set(Authentication::class, new Authentication());
 
         $middleware = [
             'routeMiddleware' => [
