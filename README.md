@@ -4,6 +4,8 @@
 
 * [Feature](https://github.com/UnknownRori/Rin#-feature)
 
+* [Basic Usage](https://github.com/UnknownRori/Rin#-basic-usage)
+
 * [Installation](https://github.com/UnknownRori/Rin#-installation)
 
     * [For Projects](https://github.com/UnknownRori/Rin#-for-projects)
@@ -25,11 +27,38 @@ Rin is a lightweight minimalistic framework written in php, it's feature SEO Fri
 
 * Dependency Injection
 
+## 🚀 Basic Usage
+
+Don't use this library until the API is stable
+
+
+```php
+// index.php
+<?php
+
+require './vendor/autoload.php';
+
+use UnknownRori\Rin\Application;
+use UnknownRori\Rin\Http\Route;
+
+Route::get('/', function () {
+    echo "<h1>Hello, World!</h1>";
+});
+
+$app = new Application();
+
+$app->serve();
+```
+
+To start the server just type
+
+`php -S 127.0.0.1:8000 -t ./your-public-directory ./index.php`
+
 ## 🛠️ Installation
 
 * ### 📦 For Projects
 
-    Not available on composer yet
+    composer require unknownrori/project-reiki
 
 * ### 🛠️ For Development
 
@@ -42,6 +71,11 @@ Rin is a lightweight minimalistic framework written in php, it's feature SEO Fri
     > composer install
     ```
 
+## 📔 Plan
+
+* Remove the custom route and integrate symfony route while still serving Laravel Like API
+
+* Probably remove built in Dependency Injection Container and use symfony instead
 
 ## 🌟 Contribution
 
