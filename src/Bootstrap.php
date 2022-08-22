@@ -1,3 +1,3 @@
 <?php
 
-require './Utility/Response.php';
+require 'Utility/Response.php';
