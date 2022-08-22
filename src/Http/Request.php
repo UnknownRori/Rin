@@ -15,8 +15,9 @@ class Request
     protected Session $session;
 
 
-    public function __construct(protected Session $sesion)
+    public function __construct(Session $session)
     {
+        $this->session = $session;
         $this->GET = &$_GET;
         $this->POST = &$_POST;
         $this->method = $_SERVER['REQUEST_METHOD'];
