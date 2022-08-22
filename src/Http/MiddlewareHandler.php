@@ -33,7 +33,7 @@ class MiddlewareHandler
     /**
      * Run route middleware
      */
-    public function run(array |string $middleware, array $additionalData = []): mixed
+    public function run(array |string $middleware, array &$additionalData = []): mixed
     {
         if (is_array($middleware)) {
             $result = [];
@@ -42,7 +42,7 @@ class MiddlewareHandler
                 if (array_key_exists($middleware[$i], $this->middleware['routeMiddleware']))
                     $result[] = DependencyInjection::resolveInvoke($this->middleware['routeMiddleware'][$middleware[$i]], $this->container, $additionalData);
                 else
-                    return throw new MiddlewareNotFound($middleware[$i]);
+                    throw new MiddlewareNotFound($middleware[$i]);
             }
 
             return $result;
@@ -51,6 +51,6 @@ class MiddlewareHandler
         if (array_key_exists($middleware, $this->middleware['routeMiddleware']))
             return DependencyInjection::resolveInvoke($this->middleware['routeMiddleware'][$middleware], $this->container, $additionalData);
 
-        return new MiddlewareNotFound($middleware);
+        throw new MiddlewareNotFound($middleware);
     }
 }
