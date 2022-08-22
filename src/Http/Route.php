@@ -99,6 +99,10 @@ class Route
 
         if (is_callable($controller))
             DependencyInjection::resolveCall($controller, $container, $additionalData);
+        if (is_string($controller))
+            DependencyInjection::resolveInvoke($controller, $container, $additionalData);
+        if (is_array($controller))
+            DependencyInjection::resolveMethodCall($controller[0], $controller[1], $container, $additionalData);
 
         $middlewareHandler->run($middleware);
     }
@@ -109,7 +113,7 @@ class Route
      * @param  callable|array $controller
      * @return static
      */
-    public static function get(string $uri, callable|array $controller): static
+    public static function get(string $uri, string|callable|array $controller): static
     {
         $self = new static;
 
@@ -124,7 +128,7 @@ class Route
      * @param  callable|array $controller
      * @return static
      */
-    public static function post(string $uri, callable|array $controller): static
+    public static function post(string $uri, string|callable|array $controller): static
     {
         $self = new static;
 
@@ -139,7 +143,7 @@ class Route
      * @param  callable|array $controller
      * @return static
      */
-    public static function patch(string $uri, callable|array $controller): static
+    public static function patch(string $uri, string|callable|array $controller): static
     {
         $self = new static;
 
@@ -154,7 +158,7 @@ class Route
      * @param  callable|array $controller
      * @return static
      */
-    public static function delete(string $uri, callable|array $controller): static
+    public static function delete(string $uri, string|callable|array $controller): static
     {
         $self = new static;
 
@@ -345,7 +349,7 @@ class Route
      * @param  string $uri
      * @param  callable|array $controller
      */
-    protected function registerRoute(string|array $method, string $uri, callable|array $controller)
+    protected function registerRoute(string|array $method, string $uri, string|callable|array $controller)
     {
         if (is_array($method))
             $this->methods = $method;
