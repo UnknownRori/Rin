@@ -3,8 +3,9 @@
 namespace UnknownRori\Rin\Exceptions;
 
 use Exception;
+
 /**
- * Container Not Found Data
+ * Middleware not found
  */
 class MiddlewareNotFound extends Exception
 {
