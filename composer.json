@@ -1,5 +1,5 @@
 {
-    "name": "unknownrori/project-reiki",
+    "name": "unknownrori/rin",
     "description": "A lightweight framwork equivalent of expressjs",
     "type": "library",
     "require-dev": {

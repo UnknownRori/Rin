@@ -29,7 +29,7 @@ Rin is a lightweight minimalistic framework written in php, it's feature SEO Fri
 
 ## 🚀 Basic Usage
 
-Don't use this library until the API is stable
+Don't use this framework until the API is stable
 
 
 ```php
@@ -47,7 +47,7 @@ Route::get('/', function () {
 
 $app = new Application();
 
-$app->serve();
+return $app->serve();
 ```
 
 To start the server just type
@@ -58,7 +58,7 @@ To start the server just type
 
 * ### 📦 For Projects
 
-    `composer require unknownrori/project-reiki`
+    `composer require unknownrori/rin`
 
 * ### 🛠️ For Development
 
