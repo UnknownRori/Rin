@@ -42,12 +42,16 @@ class Application
     /**
      * Serve the Rin Application
      */
-    public function serve(): void
+    public function serve()
     {
         $session = $this->factory['session']::create(self::$config->sessionDriver, self::$config->sessionConfig);
         $request = new Request($session);
         $middleware = new MiddlewareHandler($this->container);
 
-        Route::serve($this->container, $request, $middleware);
+        $allowedResource = implode('/', Application::$config->allowedResource);
+
+        if (preg_match("/\.(?:{$allowedResource})$/", $request->getPath())) return false;
+
+        else Route::serve($this->container, $request, $middleware);
     }
 }
