@@ -17,7 +17,7 @@
 
 ## 📔 Overview
 
-Rin is a lightweight minimalistic framework written in php, it's feature SEO Friendly Routing, Middleware, and Dependency Injection. This framework is trying to solve problem when someone said [Laravel](https://laravel.com/) is overkill so this framework will be replacement for someone who not very familiar with [CodeIgniter](https://codeigniter.com/), although this framework is bare minimum.
+Rin is a lightweight minimalistic framework written in php, it's feature SEO Friendly Routing, Middleware, and Dependency Injection. This framework is trying to solve problem when someone said [Laravel](https://laravel.com/) is overkill so this framework will be replacement for someone who not very familiar with [CodeIgniter](https://codeigniter.com/), although this framework is bare minimum and not for production because this framework is just for fun.
 
 ## 🚀 Feature
 
@@ -70,12 +70,6 @@ To start the server just type
     > cd Rin
     > composer install
     ```
-
-## 📔 Plan
-
-* Remove the custom route and integrate symfony route while still serving Laravel Like API
-
-* Probably remove built in Dependency Injection Container and use symfony instead
 
 ## 🌟 Contribution
 
